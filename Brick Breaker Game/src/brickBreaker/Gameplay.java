@@ -1,6 +1,7 @@
 package brickBreaker;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -16,7 +17,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
 	private int score = 0;
 
-	private int totalBricks = 21;
+	private int totalBricks = 25;
 
 	private Timer timer;
 	private int delay = 8;
@@ -53,6 +54,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(0, 0, 3, 592);
 		g.fillRect(0, 0, 692, 3);
 		g.fillRect(691, 0, 3, 592);
+		
+		//scores
+		g.setColor(Color.white);
+		g.setFont(new Font("TimesRoman", Font.BOLD, 25));
+		g.drawString(""+score, 590, 30);
 
 		// paddle
 		g.setColor(Color.green);
@@ -61,6 +67,30 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		// ball
 		g.setColor(Color.red);
 		g.fillOval(ballPosX, ballPosY, 20, 20);
+		
+		if (totalBricks <= 0) {
+			play = false;
+			ballXDir = 0;
+			ballYDir = 0;
+			g.setColor(Color.green);
+			g.setFont(new Font("TimesRoman", Font.BOLD, 30));
+			g.drawString("VITÓRIA!", 240, 300);
+			
+			g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+			g.drawString("Pressione ENTER para jogar ", 190, 330);
+		}
+		
+		if (ballPosY > 570) {
+			play = false;
+			ballXDir = 0;
+			ballYDir = 0;
+			g.setColor(Color.red);
+			g.setFont(new Font("TimesRoman", Font.BOLD, 30));
+			g.drawString("FIM DE JOGO!", 240, 300);
+			
+			g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+			g.drawString("Pressione ENTER para jogar ", 190, 330);
+		}
 
 		g.dispose();
 
@@ -75,7 +105,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				ballYDir = -ballYDir;
 			}
 
-			A :for (int i = 0; i < map.map.length; i++) {
+			A: for (int i = 0; i < map.map.length; i++) {
 				for (int j = 0; j < map.map[0].length; j++) {
 					if (map.map[i][j] > 0) {
 						int brickX = j * map.brickWidth + 80;
@@ -97,7 +127,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 							} else {
 								ballYDir = -ballYDir;
 							}
-							
+
 							break A;
 						}
 					}
@@ -135,6 +165,23 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 			} else {
 				moveLeft();
 			}
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (!play) {
+				play = true;
+				ballPosX = 120;
+				ballPosY = 350;
+				ballXDir = -1;
+				ballYDir = -2;
+				playerX = 310;
+				score = 0;
+				totalBricks = 25;
+				map = new MapGenerator(5, 8);
+				
+				repaint();
+			}
+			
 		}
 	}
 
