@@ -2,6 +2,7 @@ package brickBreaker;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,8 +27,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private int ballPosY = 350;
 	private int ballXDir = -1;
 	private int ballYDir = -2;
+	
+	private MapGenerator map;
 
 	public Gameplay() {
+		map = new MapGenerator(5, 8);
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -40,6 +44,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		// background
 		g.setColor(Color.black);
 		g.fillRect(1, 1, 692, 592);
+		
+		//drawing map
+		map.drawBricks((Graphics2D)g);
 
 		// borders
 		g.setColor(Color.yellow);
@@ -52,7 +59,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(playerX, 550, 100, 8);
 
 		// ball
-		g.setColor(Color.yellow);
+		g.setColor(Color.red);
 		g.fillOval(ballPosX, ballPosY, 20, 20);
 
 		g.dispose();
@@ -104,12 +111,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 	public void moveRight() {
 		play = true;
-		playerX += 20;
+		playerX += 25;
 	}
 
 	public void moveLeft() {
 		play = true;
-		playerX -= 20;
+		playerX -= 25;
 	}
 
 	@Override
