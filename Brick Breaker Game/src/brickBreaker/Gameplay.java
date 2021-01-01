@@ -9,9 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import brickBreaker.Main.SoundEffect;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
@@ -28,11 +34,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private int ballPosY = 350;
 	private int ballXDir = -1;
 	private int ballYDir = -2;
-
+	
 	private MapGenerator map;
+	private SoundEffect se;
 
 	public Gameplay() {
 		map = new MapGenerator(5, 8);
+		se = new SoundEffect();
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -149,7 +157,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 		repaint();
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
