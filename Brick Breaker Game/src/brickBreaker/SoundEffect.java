@@ -7,8 +7,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class SoundEffect {
-	String brickSound;
-	brickSound = ".//sounds//brick.wav";
+//	private String brickSound;
+//	brickSound = ".//sounds//brick.wav";
 	Clip clip;
 
 	public void setFile(String soundFileName) {

@@ -41,6 +41,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	public Gameplay() {
 		map = new MapGenerator(5, 8);
 		se = new SoundEffect();
+		se.setFile();
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
