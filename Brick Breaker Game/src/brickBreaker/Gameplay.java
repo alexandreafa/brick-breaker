@@ -9,26 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
 	private int score = 0;
-
 	private int totalBricks = 25;
 
 	private Timer timer;
 	private int delay = 8;
-
 	private int playerX = 310;
 
 	private int ballPosX = 120;
 	private int ballPosY = 350;
 	private int ballXDir = -1;
 	private int ballYDir = -2;
-
 	private MapGenerator map;
 
 	public Gameplay() {
@@ -38,7 +34,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		setFocusTraversalKeysEnabled(false);
 		timer = new Timer(delay, this);
 		timer.start();
-
 	}
 
 	public void paint(Graphics g) {
@@ -54,11 +49,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(0, 0, 3, 592);
 		g.fillRect(0, 0, 692, 3);
 		g.fillRect(691, 0, 3, 592);
-		
-		//scores
+
+		// scores
 		g.setColor(Color.white);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 25));
-		g.drawString(""+score, 590, 30);
+		g.drawString("" + score, 590, 30);
 
 		// paddle
 		g.setColor(Color.green);
@@ -67,7 +62,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		// ball
 		g.setColor(Color.red);
 		g.fillOval(ballPosX, ballPosY, 20, 20);
-		
+
 		if (totalBricks <= 0) {
 			play = false;
 			ballXDir = 0;
@@ -75,11 +70,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 			g.setColor(Color.green);
 			g.setFont(new Font("TimesRoman", Font.BOLD, 30));
 			g.drawString("VITÓRIA!", 240, 300);
-			
+
 			g.setFont(new Font("TimesRoman", Font.BOLD, 20));
 			g.drawString("Pressione ENTER para jogar ", 190, 330);
 		}
-		
+
 		if (ballPosY > 570) {
 			play = false;
 			ballXDir = 0;
@@ -87,13 +82,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 			g.setColor(Color.red);
 			g.setFont(new Font("TimesRoman", Font.BOLD, 30));
 			g.drawString("FIM DE JOGO!", 240, 300);
-			
+
 			g.setFont(new Font("TimesRoman", Font.BOLD, 20));
 			g.drawString("Pressione ENTER para jogar ", 190, 330);
 		}
-
 		g.dispose();
-
 	}
 
 	@Override
@@ -166,7 +159,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				moveLeft();
 			}
 		}
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (!play) {
 				play = true;
@@ -178,10 +171,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				score = 0;
 				totalBricks = 25;
 				map = new MapGenerator(5, 8);
-				
+
 				repaint();
 			}
-			
 		}
 	}
 
