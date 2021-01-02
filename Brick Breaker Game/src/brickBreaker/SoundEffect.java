@@ -29,11 +29,11 @@ public class SoundEffect {
 			public void update(LineEvent e) {
 				if (e.getType() == LineEvent.Type.STOP) {
 					e.getLine().close();
+					clip.close();
 				}
-				
 			}
 		});
-		
+
 		clip.stop();
 		clip.flush();
 		clip.setFramePosition(0);

@@ -16,6 +16,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
 	private int score = 0;
 	public String brickSound = "./src/brickBreaker/sounds/brick.wav";
+	public String winSound = "./src/brickBreaker/sounds/win.wav";
+	public String loseSound = "./src/brickBreaker/sounds/lose.wav";
 	private int totalBricks = 25;
 
 	private Timer timer;
@@ -30,6 +32,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 	private MapGenerator map;
 	private SoundEffect se;
+	private SoundEffect win;
+	private SoundEffect lose;
 
 	public Gameplay() {
 		map = new MapGenerator(5, 8);
@@ -69,6 +73,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillOval(ballPosX, ballPosY, 20, 20);
 
 		if (totalBricks <= 0) {
+//			playWin();
 			play = false;
 			ballXDir = 0;
 			ballYDir = 0;
@@ -81,6 +86,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		}
 
 		if (ballPosY > 570) {
+//			playLose();
 			play = false;
 			ballXDir = 0;
 			ballYDir = 0;
@@ -189,6 +195,18 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		se = new SoundEffect();
 		se.setFile(brickSound);
 		se.play();
+	}
+
+	public void playWin() {
+		win = new SoundEffect();
+		win.setFile(winSound);
+		win.play();
+	}
+
+	public void playLose() {
+		lose = new SoundEffect();
+		lose.setFile(loseSound);
+		lose.play();
 	}
 
 	public void moveRight() {
