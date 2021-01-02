@@ -9,20 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
-import brickBreaker.Main.SoundEffect;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
 	private int score = 0;
-
+	public String brickSound = "./src/brickBreaker/sounds/brick.wav";
 	private int totalBricks = 25;
 
 	private Timer timer;
@@ -40,8 +35,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 	public Gameplay() {
 		map = new MapGenerator(5, 8);
-		se = new SoundEffect();
-		se.setFile();
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -129,6 +122,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 						if (ballRect.intersects(brickRect)) {
 							map.setBrickValue(0, i, j);
 							totalBricks--;
+							playBrick();
 							score += 5;
 
 							if (ballPosX + 19 <= brickRect.x || ballPosX + 1 >= brickRect.x + brickRect.width) {
@@ -187,11 +181,15 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				score = 0;
 				totalBricks = 25;
 				map = new MapGenerator(5, 8);
-				
 				repaint();
 			}
 			
 		}
+	}
+	public void playBrick() {
+		se = new SoundEffect();
+		se.setFile(brickSound);
+		se.play();
 	}
 
 	public void moveRight() {
