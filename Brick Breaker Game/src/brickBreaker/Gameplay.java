@@ -15,21 +15,21 @@ import javax.swing.Timer;
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
 	private int score = 0;
-	public String brickSound = "./src/brickBreaker/sounds/brick.wav";
+  
+  public String brickSound = "./src/brickBreaker/sounds/brick.wav";
 	public String winSound = "./src/brickBreaker/sounds/win.wav";
 	public String loseSound = "./src/brickBreaker/sounds/lose.wav";
+  
 	private int totalBricks = 25;
 
 	private Timer timer;
 	private int delay = 8;
-
 	private int playerX = 310;
 
 	private int ballPosX = 120;
 	private int ballPosY = 350;
 	private int ballXDir = -1;
 	private int ballYDir = -2;
-
 	private MapGenerator map;
 	private SoundEffect se;
 	private SoundEffect win;
@@ -42,7 +42,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		setFocusTraversalKeysEnabled(false);
 		timer = new Timer(delay, this);
 		timer.start();
-
 	}
 
 	public void paint(Graphics g) {
@@ -97,9 +96,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 			g.setFont(new Font("TimesRoman", Font.BOLD, 20));
 			g.drawString("Pressione ENTER para jogar ", 190, 330);
 		}
-
 		g.dispose();
-
 	}
 
 	@Override
@@ -185,9 +182,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				score = 0;
 				totalBricks = 25;
 				map = new MapGenerator(5, 8);
-				repaint();
-			}
 
+				repaint();
+      }
 		}
 	}
 

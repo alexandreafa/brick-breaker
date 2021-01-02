@@ -10,7 +10,6 @@ public class Main {
 	public static void main(String[] args) {
 		JFrame obj = new JFrame();
 		Gameplay jogando = new Gameplay();
-		File Brick = new File("brick.wav");
 
 		obj.setBounds(10, 10, 700, 600);
 		obj.setTitle("Breakout Ball");
@@ -20,5 +19,4 @@ public class Main {
 		obj.add(jogando);
 
 	}
-
 }
