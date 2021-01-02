@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.sound.sampled.AudioSystem;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -29,7 +27,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private int ballPosY = 350;
 	private int ballXDir = -1;
 	private int ballYDir = -2;
-	
+
 	private MapGenerator map;
 	private SoundEffect se;
 
@@ -56,11 +54,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(0, 0, 3, 592);
 		g.fillRect(0, 0, 692, 3);
 		g.fillRect(691, 0, 3, 592);
-		
-		//scores
+
+		// scores
 		g.setColor(Color.white);
 		g.setFont(new Font("TimesRoman", Font.BOLD, 25));
-		g.drawString(""+score, 590, 30);
+		g.drawString("" + score, 590, 30);
 
 		// paddle
 		g.setColor(Color.green);
@@ -69,7 +67,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		// ball
 		g.setColor(Color.red);
 		g.fillOval(ballPosX, ballPosY, 20, 20);
-		
+
 		if (totalBricks <= 0) {
 			play = false;
 			ballXDir = 0;
@@ -77,11 +75,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 			g.setColor(Color.green);
 			g.setFont(new Font("TimesRoman", Font.BOLD, 30));
 			g.drawString("VITÓRIA!", 240, 300);
-			
+
 			g.setFont(new Font("TimesRoman", Font.BOLD, 20));
 			g.drawString("Pressione ENTER para jogar ", 190, 330);
 		}
-		
+
 		if (ballPosY > 570) {
 			play = false;
 			ballXDir = 0;
@@ -89,7 +87,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 			g.setColor(Color.red);
 			g.setFont(new Font("TimesRoman", Font.BOLD, 30));
 			g.drawString("FIM DE JOGO!", 240, 300);
-			
+
 			g.setFont(new Font("TimesRoman", Font.BOLD, 20));
 			g.drawString("Pressione ENTER para jogar ", 190, 330);
 		}
@@ -152,7 +150,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 		repaint();
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -169,7 +167,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				moveLeft();
 			}
 		}
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (!play) {
 				play = true;
@@ -183,9 +181,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				map = new MapGenerator(5, 8);
 				repaint();
 			}
-			
+
 		}
 	}
+
 	public void playBrick() {
 		se = new SoundEffect();
 		se.setFile(brickSound);
