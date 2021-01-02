@@ -15,6 +15,11 @@ import javax.swing.Timer;
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
 	private int score = 0;
+  
+  public String brickSound = "./src/brickBreaker/sounds/brick.wav";
+	public String winSound = "./src/brickBreaker/sounds/win.wav";
+	public String loseSound = "./src/brickBreaker/sounds/lose.wav";
+  
 	private int totalBricks = 25;
 
 	private Timer timer;
@@ -26,6 +31,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private int ballXDir = -1;
 	private int ballYDir = -2;
 	private MapGenerator map;
+	private SoundEffect se;
+	private SoundEffect win;
+	private SoundEffect lose;
 
 	public Gameplay() {
 		map = new MapGenerator(5, 8);
@@ -64,6 +72,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillOval(ballPosX, ballPosY, 20, 20);
 
 		if (totalBricks <= 0) {
+//			playWin();
 			play = false;
 			ballXDir = 0;
 			ballYDir = 0;
@@ -76,6 +85,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		}
 
 		if (ballPosY > 570) {
+//			playLose();
 			play = false;
 			ballXDir = 0;
 			ballYDir = 0;
@@ -113,6 +123,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 						if (ballRect.intersects(brickRect)) {
 							map.setBrickValue(0, i, j);
 							totalBricks--;
+							playBrick();
 							score += 5;
 
 							if (ballPosX + 19 <= brickRect.x || ballPosX + 1 >= brickRect.x + brickRect.width) {
@@ -173,8 +184,26 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 				map = new MapGenerator(5, 8);
 
 				repaint();
-			}
+      }
 		}
+	}
+
+	public void playBrick() {
+		se = new SoundEffect();
+		se.setFile(brickSound);
+		se.play();
+	}
+
+	public void playWin() {
+		win = new SoundEffect();
+		win.setFile(winSound);
+		win.play();
+	}
+
+	public void playLose() {
+		lose = new SoundEffect();
+		lose.setFile(loseSound);
+		lose.play();
 	}
 
 	public void moveRight() {

@@ -1,8 +1,12 @@
 package brickBreaker;
 
+import java.io.File;
+
 import javax.swing.JFrame;
 
 public class Main {
+	SoundEffect se = new SoundEffect();
+
 	public static void main(String[] args) {
 		JFrame obj = new JFrame();
 		Gameplay jogando = new Gameplay();
